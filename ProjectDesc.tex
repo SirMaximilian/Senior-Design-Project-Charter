@@ -1,0 +1,214 @@
+%Written by: Aaron Stillmaker
+%October 23, 2018
+%ECE 186A - Senior Design
+%
+%This is a template you can use for your Project Charter, though you will need to change a good portion of it for your own needs.
+
+\documentclass[12pt,onecolumn]{IEEEtran}			%Everything is default, except  which is journal, 10pt font, and final draft
+
+%add packages here:
+\usepackage{comment}
+
+\title{ \hfill  \vspace{2in} \\ Drone Position and Navigation using Machine Vision  \vspace{1in} }	%the \vspace is moving the title down from the top of the page
+\author{California State University, Fresno \\
+Electrical and Computer Engineering Department \\
+ECE 186A - Senior Design I \\ 					%I am jamming all of the stuff I want on the title page into the Author spot, I know, this isn't elegant
+Spring 2021 - Dr. Stillmaker \\ 					%Note the \\ line returns to make sure to put each one on a new line
+
+\vspace{12pt} 								%I put in some space to get the due date listed a little lower
+By: Alexander Her 
+\&
+Gilbert Barr \\
+Co-Technical Advisor - Dr. Hovannes Kulhandjin \\
+Co-Technical Advisor - Dr. Hayssam El-Razouk
+\vspace{2in}								%You may need to mess with this space, this space is above the signature lines.
+
+
+\vspace{4in}}								%You will need to mess with this space, this space is after the signature lines.  The idea
+										%is to make the title page by itself.  I know, this isn't elegant either, but IEEE formatting doesn't
+										%make title pages
+
+\begin{document}
+
+
+\maketitle									%This generates the title from the information given above.
+\thispagestyle{empty}						%This removes the page number from the title page.
+\newpage
+
+\newpage
+
+
+ 
+
+ \section*{Revision History}
+
+ \textbf{Revision 1.0 (Current):} \\
+ This revision is the first version of the project description. This document was written by both Alexander and Gilbert. They finalized the document on March 8, 2021 and the changes that were made included: Introduction, Abstract, Project Objectives and Success Criteria, High-Level Requirements, Assumptions, Constraints, and Standards, and Project Description and Boundaries. 
+
+\newpage 
+\tableofcontents % for the future make sure to add list of figures and tables. 
+
+
+
+ 
+ \newpage 
+ \section*{Abstract}
+ This project is the creation and implementation of a computer vision algorithm that is able to accurately detect and provide positional data of a small drone in an indoor environment. The project will consist of a base station with a mounted camera that is pointed down towards the base station. The camera will be connected to a small embedded computer capable of running our algorithm and communicating with our drone. The algorithm will be implemented using a convolutional neural network as these are the best type of networks for processing image data. Our network will be built using the Pytorch framework which will provide us with the building blocks and flexibility to create our own network quickly.
+ 
+ On the controls side of the project they will be utilizing a drone that allows for complete control directly from a computer interface as opposed to a conventional radio system that uses a handheld remote. For this section of the project code must be developed that can take positional data from a neural network and relay the appropriate movement commands to our drone.
+ 
+ 
+ \section{Introduction}
+The project will focus on utilizing a UAV (Unmanned Aerial Vehicle) to detect and provide positional data of a small drone using a computer vision algorithm. This project will be very useful in applications such as aerial deliveries, rescue operations, and warehouse logistics. In this project, the usage of machine learning algorithms will provide to be very useful so that they can maneuver the drone given the coordinates that they are given from our drone camera. Additionally, they will need to be able to interface these algorithms with the drone hardware itself. \\
+
+
+\textbf{Alexander Her} (Project Manager)\\ 
+\textbf{Major:} Computer Engineering\\
+\textbf{Responsibilities:} Alexander is responsible for developing the machine learning algorithms using Pytorch or Tensorflow. \\
+
+\textbf{Gilbert Barr}\\
+\textbf{Major:} Computer Engineering\\ 
+\textbf{Responsibilities:} Gilbert is responsible for the computer controls system of the drone as well as data set collection. \\ 
+ 
+
+ 
+ \section{Project Objectives and Success Criteria}
+ 
+ \textbf{Main Project Objectives:}
+
+ \begin{description}
+ 
+  The project objective to utilize machine vision algorithms for drone localization, detection, and control a small indoor drone. For the scope of this project, we will be using transfer learning to speed up the development and training of a model that can detect our drone in a small, enclosed environment. Once we have an algorithm that can accurately detect the position of the drone in real time, we will use it to maneuver to set positions within our enclosed environment. For this project, a base station consisting of an embedded computing platform will be used with a camera to perform the machine learning computations as well as communicate and maneuver the drone.
+  
+\end{description} 
+\vspace{12pt} 
+
+ \textbf{Success Criteria:}
+
+ \begin{description}
+  \item[$\bullet$ ] To possibly set up a test route for the drone in the airspace and have it maneuver without issues. 
+  \item[$\bullet$ ] To be able to detect objects in the environment and avoids any collisions. 
+  \item[$\bullet$ ] To have the machine learning algorithm developed so that multiple cameras can be utilized. 
+  
+\end{description} 
+\vspace{12pt} 
+ 
+ \section{High-Level Requirements}
+
+ 
+\textbf{Basic Requirements:}
+
+ \begin{description}
+  \item[$\bullet$ ] The project should be implemented in 2 semesters. 
+  \item[$\bullet$ ] The project shall be completed given the budget that was proposed. 
+  \item[$\bullet$ ] The project shall be tested extensively. 
+  
+\end{description} 
+\vspace{12pt} 
+
+\textbf{Hardware Requirements:}
+ 
+ \begin{description}
+  \item[$\bullet$ ] The drone, through the use of a base station, should be able to utilize the machine learning algorithm for making movements accordingly. 
+  \item[$\bullet$ ] The embedded computer should be able to utilize external hardware such as a camera. 
+  \item[$\bullet$ ] The embedded computer should be able to get positional data from the camera utilizing the neural network. 
+\end{description} 
+
+\vspace{12pt} 
+
+ \textbf{Software Requirements:}
+ 
+ \begin{description}
+  \item[$\bullet$ ] The machine learning algorithm should be implemented using Pytorch or Tensorflow. 
+  \item[$\bullet$ ] The algorithm should be implemented using a convolutional neural network for processing image data. 
+  \item[$\bullet$ ] The machine learning algorithm should be able to give the drone the correct coordinates for maneuvering in the airspace.
+\end{description}
+ 
+\section{Assumptions, Constraints, and Standards}
+Alexander and Gilbert are both Computer Engineering majors and have taken similar classes. Alexander has experience working with software development while Gilbert has experience working with control systems and robotics. Alexander is unfamiliar with robotics and has to learn a lot of keep up with Gilbert's extensive knowledge about drones. Both of the students are unfamiliar with machine learning and plan to learn together throughout the two semesters that they are given. 
+The background information that will be needed to complete the project would be knowledge about machine learning as well as any additional information about the hardware that they want to utilize. Some courses that will be helpful in completing this project will be: 
+
+ \begin{description}
+  \item[$\bullet$ ] ECE 71, 81, 155, 172, 173
+  \item[$\bullet$ ] CSCI 40, 41, 141
+\end{description}
+
+ 
+\section{Project Description and Boundaries}
+
+The project implementation was already explained in earlier sections so this description will serve as to provide the purpose of the project. The team's goal and vision of the completed project will be that it can be utilized in workplaces such as warehouses so that moving items could be a lot easier when vertical maneuverability is needed. The team believes that if they could develop an efficient machine learning algorithm then this could be very helpful for any packaging company in the industry. 
+
+Some potential difficulties of this project will be developing a machine learning algorithm since this is a field that both the students are not too familiar with. They will also need to learn how to use python frameworks such as Pytorch and Tensorflow that utilize machine learning models. Once that obstacle is overcome, the next main issue would be interfacing the algorithm with the drone to make sure that it is working effectively. They believe that most of the work done in this project though will be done developing the machine learning algorithm by making it as effective as possible. 
+
+One of the technical advisors that would be a great fit for this project will be Dr. Kulhandian because his extensive knowledge of Machine Learning will be very helpful in the completion of this project. He will be the best advisor for this project since we are focusing primarily on Machine Learning.
+
+Another technical advisor that would be a great fit for this project would be Dr. Razouk since he is currently teaching the algorithms courses in the ECE department. His knowledge in algorithms will be very helpful when the Machine Learning algorithms are being developed. 
+
+
+
+\section{High-Level Risks}
+Since the drone will be tested a lot and could pose a potential risk if it happens to go out of control. This should be the only risk that the team should be worried about. How this will be handled will be through: 
+\vspace{12pt} 
+ \begin{description}
+  \item[$\bullet$ ] Keeping at a safe distance when testing. 
+  \item[$\bullet$ ] Performing small tests. 
+  \item[$\bullet$ ] Checking quality of hardware constantly. 
+\end{description}
+
+
+
+\section{Equipment and Budget}
+The team should have most of the equipment that is needed for this project. For extras, an extra camera could be purchased so that the team could further develop their algorithm if it is successful. //
+\vspace{12pt} 
+
+Funds request:
+ \begin{description}
+  \item[$\bullet$ ] OpenCV AI Kit: Oak-D (\$100)
+\end{description}
+
+ 
+ \section{Approvals}
+\vspace{12pt} 
+\vspace{12pt} 
+
+
+
+\begin{tabular}{@{}p{.5in}p{4in}@{}}
+Approved: & \hrulefill \\
+& Alexander Her \\
+& Computer Engineering\\
+\end{tabular}
+\vspace{12pt} 
+
+\begin{tabular}{@{}p{.5in}p{4in}@{}}
+Approved: & \hrulefill \\
+& Gilbert Barr \\
+& Computer Engineering\\
+\end{tabular}
+\vspace{12pt} 
+
+\begin{tabular}{@{}p{.5in}p{4in}@{}}
+Approved: & \hrulefill \\
+& Hovannes Kulhandjian, Ph.D \\
+& Assistant Professor\\
+\end{tabular}
+\vspace{12pt} 
+
+\begin{tabular}{@{}p{.5in}p{4in}@{}}
+Approved: & \hrulefill \\
+& Hayssam El-Razouk, Ph.D \\
+& Assistant Professor\\
+\end{tabular}
+
+
+\newpage
+~\cite{lu2018survey}
+~\cite{mishra2019introduction}
+~\cite{shanmugamani2018deep}
+\bibliographystyle{plain}
+\bibliography{biblography.bib}
+ 
+
+\end{document}
+
+
