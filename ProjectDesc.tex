@@ -8,6 +8,10 @@
 
 %add packages here:
 \usepackage{comment}
+\usepackage{vhistory}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{caption}
 
 \title{ \hfill  \vspace{2in} \\ Drone Position and Navigation using Machine Vision  \vspace{1in} }	%the \vspace is moving the title down from the top of the page
 \author{California State University, Fresno \\
@@ -40,10 +44,13 @@ Co-Technical Advisor - Dr. Hayssam El-Razouk
 
  
 
- \section*{Revision History}
 
- \textbf{Revision 1.0 (Current):} \\
- This revision is the first version of the project description. This document was written by both Alexander and Gilbert. They finalized the document on March 8, 2021 and the changes that were made included: Introduction, Abstract, Project Objectives and Success Criteria, High-Level Requirements, Assumptions, Constraints, and Standards, and Project Description and Boundaries. 
+\begin{versionhistory}
+  \vhEntry{1.0}{03.08.21}{AH|GB}{ This revision is the first version of the project description. This document was written by both Alexander and Gilbert. They finalized the document on March 8, 2021 and the changes that were made included: Introduction, Abstract, Project Objectives and Success Criteria, High-Level Requirements, Assumptions, Constraints, and Standards, and Project Description and Boundaries. }
+  \vhEntry{1.1}{04.05.21}{AH|GB}{Adjusted document to clarify objective of project, updated revision table, and add new advisor }
+  
+\end{versionhistory}
+
 
 \newpage 
 \tableofcontents % for the future make sure to add list of figures and tables. 
@@ -53,13 +60,28 @@ Co-Technical Advisor - Dr. Hayssam El-Razouk
  
  \newpage 
  \section*{Abstract}
- This project is the creation and implementation of a computer vision algorithm that is able to accurately detect and provide positional data of a small drone in an indoor environment. The project will consist of a base station with a mounted camera that is pointed down towards the base station. The camera will be connected to a small embedded computer capable of running our algorithm and communicating with our drone. The algorithm will be implemented using a convolutional neural network as these are the best type of networks for processing image data. Our network will be built using the Pytorch framework which will provide us with the building blocks and flexibility to create our own network quickly.
+ This project is the implementation of a computer vision algorithm that is able to accurately detect and provide positional data of a small drone in an indoor environment. It will be very useful in applications such as aerial deliveries, rescue operations, and warehouse logistics.The project will consist of a base station with a mounted camera that is pointed down towards the base station. The camera will be connected to a small embedded computer capable of running our algorithm and communicating with our drone. 
+ 
+ The algorithm will be implemented using a convolutional neural network as these are the best type of networks for processing image data. Our network will be built using the Pytorch framework which will provide us with the building blocks and flexibility to create our own network quickly.
  
  On the controls side of the project they will be utilizing a drone that allows for complete control directly from a computer interface as opposed to a conventional radio system that uses a handheld remote. For this section of the project code must be developed that can take positional data from a neural network and relay the appropriate movement commands to our drone.
  
  
  \section{Introduction}
-The project will focus on utilizing a UAV (Unmanned Aerial Vehicle) to detect and provide positional data of a small drone using a computer vision algorithm. This project will be very useful in applications such as aerial deliveries, rescue operations, and warehouse logistics. In this project, the usage of machine learning algorithms will provide to be very useful so that they can maneuver the drone given the coordinates that they are given from our drone camera. Additionally, they will need to be able to interface these algorithms with the drone hardware itself. \\
+The project will focus on utilizing machine learning to detect and provide positional data of a small drone using machine vision. In this project machine learning will be utilized to infer the the position of a drone which will allow for control and navigation in a limited area. It will be necessary to implement an interface between the machine learning algorithm and the communication system of the drone. \\
+
+\begin{figure}[hp]
+    \centering
+    \includegraphics[width=12cm]{Images/senior design figure.PNG}
+    \caption{Base Station with Drone, Jetson NANO, OpenCV, and Oak-D Camera}
+    \label{fig:galaxy}
+\end{figure}
+
+
+\section{Required Background Knowledge}
+The knowledge that will be most required for the completion of this project will be software related. This is due to the fact that the algorithms that will be developed will be done so over in software. The algorithms will be developed in Python and will utilize the Pytorch framework library. Pytorch is a machine learning library that will allow the group to develop the model. This model will be developed using Transfer Learning which utilizes a pre-existing model that solves one problem to be developed to solve a different but related problem. It will also be important that there is a good understand of how Machine Learning works because the project's main problems will be based heavily on how efficiently the algorithms are written. 
+
+\vspace{12pt} 
 
 
 \textbf{Alexander Her} (Project Manager)\\ 
@@ -69,6 +91,8 @@ The project will focus on utilizing a UAV (Unmanned Aerial Vehicle) to detect an
 \textbf{Gilbert Barr}\\
 \textbf{Major:} Computer Engineering\\ 
 \textbf{Responsibilities:} Gilbert is responsible for the computer controls system of the drone as well as data set collection. \\ 
+
+
  
 
  
@@ -76,22 +100,20 @@ The project will focus on utilizing a UAV (Unmanned Aerial Vehicle) to detect an
  
  \textbf{Main Project Objectives:}
 
- \begin{description}
- 
-  The project objective to utilize machine vision algorithms for drone localization, detection, and control a small indoor drone. For the scope of this project, we will be using transfer learning to speed up the development and training of a model that can detect our drone in a small, enclosed environment. Once we have an algorithm that can accurately detect the position of the drone in real time, we will use it to maneuver to set positions within our enclosed environment. For this project, a base station consisting of an embedded computing platform will be used with a camera to perform the machine learning computations as well as communicate and maneuver the drone.
+    The project objective to utilize machine vision algorithms for drone localization, detection, and control a small indoor drone. For the scope of this project, we will be using transfer learning to speed up the development and training of a model that can detect our drone in a small, enclosed environment. Once we have an algorithm that can accurately detect the position of the drone in real time, we will use it to maneuver to set positions within our enclosed environment. For this project, a base station consisting of an embedded computing platform will be used with a camera to perform the machine learning computations as well as communicate and maneuver the drone.
   
-\end{description} 
 \vspace{12pt} 
 
  \textbf{Success Criteria:}
 
  \begin{description}
-  \item[$\bullet$ ] To possibly set up a test route for the drone in the airspace and have it maneuver without issues. 
+  \item[$\bullet$ ] To have the machine vision algorithm developed enough to accurately detect drone position within 5cm error. 
+  \item[$\bullet$ ] To set up a target route for the drone in the airspace and have it maneuver without issues. 
   \item[$\bullet$ ] To be able to detect objects in the environment and avoids any collisions. 
-  \item[$\bullet$ ] To have the machine learning algorithm developed so that multiple cameras can be utilized. 
-  
 \end{description} 
 \vspace{12pt} 
+
+
  
  \section{High-Level Requirements}
 
@@ -101,9 +123,20 @@ The project will focus on utilizing a UAV (Unmanned Aerial Vehicle) to detect an
  \begin{description}
   \item[$\bullet$ ] The project should be implemented in 2 semesters. 
   \item[$\bullet$ ] The project shall be completed given the budget that was proposed. 
-  \item[$\bullet$ ] The project shall be tested extensively. 
+  \item[$\bullet$ ] The project shall be tested extensively along project development. 
   
 \end{description} 
+
+\vspace{12pt} 
+
+ \textbf{Milestone Tasks:}
+ 
+ \begin{description}
+  \item[$\bullet$ ] Access to the Unmanned System Research Team (USRT) lab will be crucial to the development of this project due to the tools that are offered in the laboratory. 
+  \item[$\bullet$ ] Proper design of the quad-copter frame will ensure that the drone can go through intensive testing.  
+  \item[$\bullet$ ] Efficient machine learning algorithms that will allow for the quad-copter drone to effectively maneuver through the indoor airspace. 
+\end{description} 
+
 \vspace{12pt} 
 
 \textbf{Hardware Requirements:}
@@ -123,16 +156,52 @@ The project will focus on utilizing a UAV (Unmanned Aerial Vehicle) to detect an
   \item[$\bullet$ ] The algorithm should be implemented using a convolutional neural network for processing image data. 
   \item[$\bullet$ ] The machine learning algorithm should be able to give the drone the correct coordinates for maneuvering in the airspace.
 \end{description}
+\vspace{12pt} 
+
+ \section{Test Plan:}
+  \begin{description}
+  \item[$\bullet$ ] Ensure camera mount is stable and base station is built so that no hardware failures can occur during testing. 
+  \item[$\bullet$ ] Getting images from the camera. 
+  \item[$\bullet$ ] Being able to move the drone using Python scripts.
+  \item[$\bullet$ ] Being able to implement transfer learning into our machine learning model. 
+  \item[$\bullet$ ] Interface the Jetson NANO with the drone so that data can be retrieved.
+  
+\end{description} 
+\vspace{12pt} 
+
+
  
 \section{Assumptions, Constraints, and Standards}
 Alexander and Gilbert are both Computer Engineering majors and have taken similar classes. Alexander has experience working with software development while Gilbert has experience working with control systems and robotics. Alexander is unfamiliar with robotics and has to learn a lot of keep up with Gilbert's extensive knowledge about drones. Both of the students are unfamiliar with machine learning and plan to learn together throughout the two semesters that they are given. 
 The background information that will be needed to complete the project would be knowledge about machine learning as well as any additional information about the hardware that they want to utilize. Some courses that will be helpful in completing this project will be: 
 
  \begin{description}
-  \item[$\bullet$ ] ECE 71, 81, 155, 172, 173
-  \item[$\bullet$ ] CSCI 40, 41, 141
+  \item[$\bullet$ ] ECE 71, 81, 141, 155, 172, 173
+  \item[$\bullet$ ] CSCI 40, 41
 \end{description}
+\vspace{12pt} 
 
+\underline{ECE 71/ CSCI 40}
+\vspace{6pt} 
+
+ECE 71 and CSCI 40 are both introduction courses to programming and will need to have been a prerequisite for this course because 
+
+\vspace{6pt}
+\underline{ECE 71/ CSCI 41}
+\vspace{6pt} 
+
+\underline{ECE 141}
+\vspace{6pt} 
+
+\underline{ECE 155}
+\vspace{6pt} 
+
+\underline{ECE 172}
+\vspace{6pt} 
+
+\underline{ECE 173}
+\vspace{6pt} 
+ 
  
 \section{Project Description and Boundaries}
 
@@ -142,7 +211,7 @@ Some potential difficulties of this project will be developing a machine learnin
 
 One of the technical advisors that would be a great fit for this project will be Dr. Kulhandian because his extensive knowledge of Machine Learning will be very helpful in the completion of this project. He will be the best advisor for this project since we are focusing primarily on Machine Learning.
 
-Another technical advisor that would be a great fit for this project would be Dr. Razouk since he is currently teaching the algorithms courses in the ECE department. His knowledge in algorithms will be very helpful when the Machine Learning algorithms are being developed. 
+Another technical advisor that would be a great fit for this project would be Dr. El-Razouk since he is currently teaching the algorithms courses in the ECE department. His knowledge in algorithms will be very helpful when the Machine Learning algorithms are being developed. 
 
 
 
@@ -150,20 +219,50 @@ Another technical advisor that would be a great fit for this project would be Dr
 Since the drone will be tested a lot and could pose a potential risk if it happens to go out of control. This should be the only risk that the team should be worried about. How this will be handled will be through: 
 \vspace{12pt} 
  \begin{description}
-  \item[$\bullet$ ] Keeping at a safe distance when testing. 
-  \item[$\bullet$ ] Performing small tests. 
-  \item[$\bullet$ ] Checking quality of hardware constantly. 
+  \item[$\bullet$ ] Keeping at a safe distance when testing so that no injuries are at risk. 
+  \item[$\bullet$ ] Incremental testing that allows for testing each feature. 
+  \item[$\bullet$ ] Checking quality of hardware constantly by performing quality checks before flight runs. 
 \end{description}
 
 
 
 \section{Equipment and Budget}
-The team should have most of the equipment that is needed for this project. For extras, an extra camera could be purchased so that the team could further develop their algorithm if it is successful. //
+The team should have most of the equipment that is needed for this project. For extras, an extra camera could be purchased so that the team could further develop their algorithm if it is successful. 
+\vspace{12pt} 
+
+Current Equipment in Inventory: 
+ \begin{description}
+  \item[$\bullet$ ] OpenCV AI Kit: Oak-D Camera
+  \item[$\bullet$ ] Jetson NANO
+  \item[$\bullet$ ] Crazyfile 2.0 Quad-Copter
+\end{description}
+
 \vspace{12pt} 
 
 Funds request:
+
+\begin{center}
+\begin{tabular}{| m{3cm} | m{13.5cm}| m{1cm} |} 
+ \hline
+ OpenCV AI Kit: Oak-D Camera & Another camera is being requested because the plan of the project is to hopefully be able to utilize multiple camera angels and with the addition of these camera, that will be possible.  & \$100 \\
+ \hline
+ PVC Pipes for constructing camera mount & To construct the camera mount, the best material that was thought of to ensure stable captures of the base station was PVC Pipes. & \$50 \\
+ \hline
+ Crazyflie Bolt & An additional drone so both students can do development and testing would be beneficial. & \$225 \\
+ \hline
+\end{tabular}
+\end{center}
+
  \begin{description}
-  \item[$\bullet$ ] OpenCV AI Kit: Oak-D (\$100)
+  \item[$\bullet$ ] OpenCV AI Kit: Oak-D Camera (\$100)
+  \item Another camera is being requested because the plan of the project is to hopefully be able to utilize multiple camera angels and with the addition of these camera, that will be possible. 
+  \vspace{12pt} 
+  \item[$\bullet$ ] PCP Pipes for constructing camera mount (\$50)
+  \item To construct the camera mount, the best material that was thought of to ensure stable captures of the base station was PCP Pipes. 
+  \vspace{12pt} 
+  \item[$\bullet$ ] CrazyFile 2.1 Quad-Copter (\$195)
+  \item Since Gilbert already has a Quad-Copter, both students agree that it would be beneficial if both students had access to their own separate drones so that they could work on the drone themselves if need be. 
+  
 \end{description}
 
  
