@@ -182,7 +182,26 @@ The project objective to utilize machine vision algorithms for drone localizatio
 \vspace{12pt} 
 
 
-
+\section{Test Plan}
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{| m{3cm} | m{13cm}| } 
+ \hline
+  OpenCV AI Kit: Oak-D Camera & The success criteria for the camera tests will be that the camera must be able to send photos to the Jetson NANO and it must be able to send multiple photos. Gilbert Barr will be in charge of making sure that this works. The tests will be stopped if the images are not able to be uploaded to the Jetson NANO.   \\
+ \hline
+ Crazyfile 2.1 & The success criteria for the drone will be if the Jetson NANO will be able to send movement commands to the drone and if the movement error is within ±5 inches of input from the Jetson NANO. These tests will be run by Gilbert Barr. The tests will be stopped if the drone cannot fly properly and safely.   \\
+ \hline
+ Jetson NANO & The success criteria for the Jetson NANO will be if the device will be abble to take in images and detect the drone in the base station airspace. The images should also be able to detect the drone within ±5 seconds of input from the depth sensing camera. These test will be run by both Gilbert Barr and Alexander Her. The tests will be stopped if the Jetson NANO cannot run the Machine Learning algorithm in real time.   \\
+ \hline
+ Data Set Collection & The success criteria of the data set collections will be if ther camera will be able to detect the drone in the picture frame. The distance from label to drone should also be within ±3 cm. These tests will be run by both Gilbert Barr and Alexander Her. The tests will be stopped if the group is not able to properly label the images that will be collected.    \\
+ \hline
+ Machine Learning Algorithm & The success criteria of the algorithm will be if the algorithm is able to detect the drone in the picture frame and if the accuracy is higher than 90\&. The tests will be run by Alexander Her since his responsibility will be developing the algorithm. The tests will be stopped if the algorithm is not able to run real time on the Jetson NANO and accurately detect the drone within the picture frame.  \\
+ \hline
+\end{tabular}
+\end{center}
+\caption{Test Plans}
+\label{Test Table:1}
+\end{table}
 
  
 \section{Assumptions, Constraints, and Standards}
@@ -272,12 +291,20 @@ Current Equipment in Inventory:
  \hline
  Crazyflie 2.0 & Small drone used for proof of concept and testing interface with Jetson Nano & \$195 \\
  \hline
- Crazyflie Bolt & The Bolt is a new & \$200 \\
+ Crazyflie Bolt & The Bolt is the new platform that will be utilized for it flexibility and customizability. This will be the flight controller for our custom done platform that must be designed from scratch and built & \$200 \\
+ \hline
+ Crazyflie Add-on: Flow Deck & T & \$50 \\
+ \hline
+ Crazyflie Add-on: Multi-Ranger Deck & T & \$80 \\
+ \hline
+ Crazyflie Add-on: Lighthouse Deck & T & \$80 \\
+ \hline
+ Two SteamVR Base Station 2.0 & T & \$300 \\
  \hline
 \end{tabular}
 \end{center}
 \caption{Budget Plans}
-\label{Budget Table:2}
+\label{Inventory Table:2}
 \end{table}
 
  \begin{description}
