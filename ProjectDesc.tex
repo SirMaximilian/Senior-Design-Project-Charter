@@ -12,6 +12,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{pdfpages}
+\usepackage{placeins}
+\usepackage{chngcntr}
+
+
+\graphicspath{ {figures/} }
 
 \title{ \hfill  \vspace{2in} \\ Drone Position and Navigation using Machine Vision  \vspace{1in} }	%the \vspace is moving the title down from the top of the page
 \author{California State University, Fresno \\
@@ -55,6 +61,10 @@ Co-Technical Advisor - Dr. Hayssam El-Razouk
 \newpage 
 \tableofcontents % for the future make sure to add list of figures and tables. 
 
+\newpage
+\listoffigures
+\listoftables
+
 
 
  
@@ -68,13 +78,13 @@ Co-Technical Advisor - Dr. Hayssam El-Razouk
  
  
  \section{Introduction}
-The project will focus on utilizing machine learning to detect and provide positional data of a small drone using machine vision. In this project machine learning will be utilized to infer the the position of a drone which will allow for control and navigation in a limited area. It will be necessary to implement an interface between the machine learning algorithm and the communication system of the drone. \\
+The project will focus on utilizing machine learning to detect and provide positional data of a small drone using machine vision. In this project machine learning will be utilized to infer the the position of a drone which will allow for control and navigation in a limited area [1]. It will be necessary to implement an interface between the machine learning algorithm and the communication system of the drone. \\
 
 \begin{figure}[hp]
     \centering
-    \includegraphics[width=12cm]{Images/senior design figure.PNG}
+    \includegraphics[width=12cm]{Images/senior design figure.PNG} 
     \caption{Base Station with Drone, Jetson NANO, OpenCV, and Oak-D Camera}
-    \label{fig:galaxy}
+    \label{fig:project_overview}
 \end{figure}
 
 
@@ -93,15 +103,28 @@ The knowledge that will be most required for the completion of this project will
 \textbf{Responsibilities:} Gilbert is responsible for the computer controls system of the drone as well as data set collection. \\ 
 
 
- 
 
  
  \section{Project Objectives and Success Criteria}
  
+ \vspace{12pt} 
+ 
+  \begin{figure}[hp]
+    \centering
+    \includegraphics[width=12cm]{Images/drone localization flow chart.PNG} 
+    \caption{Drone Localization Flow Chart Overview}
+    \label{fig:Drone Flowchart}
+\end{figure}
+
+ 
  \textbf{Main Project Objectives:}
 
-    The project objective to utilize machine vision algorithms for drone localization, detection, and control a small indoor drone. For the scope of this project, we will be using transfer learning to speed up the development and training of a model that can detect our drone in a small, enclosed environment. Once we have an algorithm that can accurately detect the position of the drone in real time, we will use it to maneuver to set positions within our enclosed environment. For this project, a base station consisting of an embedded computing platform will be used with a camera to perform the machine learning computations as well as communicate and maneuver the drone.
+The project objective to utilize machine vision algorithms for drone localization, detection, and control a small indoor drone. For the scope of this project, we will be using transfer learning to speed up the development and training of a model that can detect our drone in a small, enclosed environment. Once we have an algorithm that can accurately detect the position of the drone in real time, we will use it to maneuver to set positions within our enclosed environment. For this project, a base station consisting of an embedded computing platform will be used with a camera to perform the machine learning computations as well as communicate and maneuver the drone.
   
+
+
+
+
 \vspace{12pt} 
 
  \textbf{Success Criteria:}
@@ -158,16 +181,7 @@ The knowledge that will be most required for the completion of this project will
 \end{description}
 \vspace{12pt} 
 
- \section{Test Plan:}
-  \begin{description}
-  \item[$\bullet$ ] Ensure camera mount is stable and base station is built so that no hardware failures can occur during testing. 
-  \item[$\bullet$ ] Getting images from the camera. 
-  \item[$\bullet$ ] Being able to move the drone using Python scripts.
-  \item[$\bullet$ ] Being able to implement transfer learning into our machine learning model. 
-  \item[$\bullet$ ] Interface the Jetson NANO with the drone so that data can be retrieved.
-  
-\end{description} 
-\vspace{12pt} 
+
 
 
  
@@ -181,27 +195,41 @@ The background information that will be needed to complete the project would be 
 \end{description}
 \vspace{12pt} 
 
-\underline{ECE 71/ CSCI 40}
+\underline{ECE 71 / CSCI 40}
 \vspace{6pt} 
 
-ECE 71 and CSCI 40 are both introduction courses to programming and will need to have been a prerequisite for this course because 
+ECE 71 and CSCI 40 are both introduction courses to programming and will need to have been a prerequisite for this project because this project will utilize Python which is a Object-Oriented language. In these courses, students are first introduced to Object-Oriented programming.
 
 \vspace{6pt}
-\underline{ECE 71/ CSCI 41}
+
+\underline{ECE 81 / CSCI 41}
+\vspace{6pt}
+
+ECE 81 and CSCI 41 are the courses that would usually be taken after ECE 71 pr CSCI 40. These two courses focus on learning how data structures and algorithms work. These concepts will be very important in our project since we will be developing an algorithm to maneuver our drone. 
 \vspace{6pt} 
 
 \underline{ECE 141}
 \vspace{6pt} 
 
+ECE 141 will be an important course because this course, Algorithmic Computations, is a continuation of the introduction to Data Structures and Algorithms course. This course will be very useful in developing an efficient and complex algorithm. 
+
+\vspace{6pt} 
 \underline{ECE 155}
 \vspace{6pt} 
 
+ECE 155, Controls Systems, covers topics including PID controllers and how to tune them. For the custom drone, minor modifications and tuning to the PID coefficients will be necessary so basic knowledge on PIDs is necessary.
+
+\vspace{6pt} 
 \underline{ECE 172}
 \vspace{6pt} 
 
+ECE 172, Machine learning, covers topic such as machine vision and different image processing models and algorithms.
+
+\vspace{6pt} 
 \underline{ECE 173}
 \vspace{6pt} 
  
+ECE 173, Robotics, covers robotic control theory topics such as kinematics and inverse kinematics. Inverse kinematics will be used to calculate the drone movements necessary to maneuver from its position to a desired position.
  
 \section{Project Description and Boundaries}
 
@@ -230,41 +258,58 @@ Since the drone will be tested a lot and could pose a potential risk if it happe
 The team should have most of the equipment that is needed for this project. For extras, an extra camera could be purchased so that the team could further develop their algorithm if it is successful. 
 \vspace{12pt} 
 
-Current Equipment in Inventory: 
+Current Equipment in Inventory:
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{| m{3cm} | m{13cm}| m{1cm} |} 
+ \hline
+  Item & Reason  & Price \\
+ \hline
+ OpenCV AI Kit: Oak-D Camera & Stereo Camera developed to work with OpenCV  & \$100 \\
+ \hline
+ Jetson Nano & The embedded computing platform that will be utilized for machine learning inference and drone control  & \$100 \\
+ \hline
+ Crazyflie 2.0 & Small drone used for proof of concept and testing interface with Jetson Nano & \$195 \\
+ \hline
+ Crazyflie Bolt & The Bolt is a new & \$200 \\
+ \hline
+\end{tabular}
+\end{center}
+\caption{Budget Plans}
+\label{Budget Table:2}
+\end{table}
+
  \begin{description}
   \item[$\bullet$ ] OpenCV AI Kit: Oak-D Camera
   \item[$\bullet$ ] Jetson NANO
   \item[$\bullet$ ] Crazyfile 2.0 Quad-Copter
+  \item[$\bullet$ ] Two SteamVR base station 2.0
 \end{description}
 
 \vspace{12pt} 
 
 Funds request:
 
+ \begin{table}[h!]
 \begin{center}
-\begin{tabular}{| m{3cm} | m{13.5cm}| m{1cm} |} 
+\begin{tabular}{| m{3cm} | m{13cm}| m{1cm} |} 
  \hline
- OpenCV AI Kit: Oak-D Camera & Another camera is being requested because the plan of the project is to hopefully be able to utilize multiple camera angels and with the addition of these camera, that will be possible.  & \$100 \\
+  Item & Reason  & Price \\
+ \hline
+ OpenCV AI Kit: Oak-D Camera & Another camera is being requested because the plan of the project is to hopefully be able to utilize multiple camera angels and with the addition of this camera, that will be possible.  & \$100 \\
  \hline
  PVC Pipes for constructing camera mount & To construct the camera mount, the best material that was thought of to ensure stable captures of the base station was PVC Pipes. & \$50 \\
  \hline
- Crazyflie Bolt & An additional drone so both students can do development and testing would be beneficial. & \$225 \\
+ Crazyflie 2.1 & An additional drone so both students can do development and testing would be beneficial. & \$225 \\
  \hline
 \end{tabular}
 \end{center}
-
- \begin{description}
-  \item[$\bullet$ ] OpenCV AI Kit: Oak-D Camera (\$100)
-  \item Another camera is being requested because the plan of the project is to hopefully be able to utilize multiple camera angels and with the addition of these camera, that will be possible. 
-  \vspace{12pt} 
-  \item[$\bullet$ ] PCP Pipes for constructing camera mount (\$50)
-  \item To construct the camera mount, the best material that was thought of to ensure stable captures of the base station was PCP Pipes. 
-  \vspace{12pt} 
-  \item[$\bullet$ ] CrazyFile 2.1 Quad-Copter (\$195)
-  \item Since Gilbert already has a Quad-Copter, both students agree that it would be beneficial if both students had access to their own separate drones so that they could work on the drone themselves if need be. 
-  
-\end{description}
-
+\caption{Budget Plans}
+\label{Budget Table:2}
+\end{table}
+\vspace{12pt} 
+ 
  
  \section{Approvals}
 \vspace{12pt} 
